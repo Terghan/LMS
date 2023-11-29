@@ -70,7 +70,15 @@ public class LibrarianInterface {
                     Book updateBook = bookDatabase.getBookDetails(updateISBN);
                     if (updateBook != null) {
                         // Get updated details for the book
+                        System.out.println("Please enter a new title: ");
+                        String updatedTitle = scanner.nextLine();
+                        System.out.println("Please enter the new author: ");
+                        String updatedAuthor = scanner.nextLine();
+                        System.out.println("Please enter the new genre: ");
+                        String updatedGenre = scanner.nextLine();
+
                         // Update the book using updateBook.updateBookDetails(newDetails);
+                        updateBook.updateBookDetails(updatedTitle, updatedAuthor, updatedGenre, updateISBN);
                     } else {
                         System.out.println("Book not found.");
                     }
@@ -123,6 +131,7 @@ public class LibrarianInterface {
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
             }
+            scanner.close();
         }
 
     /**
@@ -138,6 +147,8 @@ public class LibrarianInterface {
                 scanner.nextLine(); // Consume newline character
 
                 librarianInterface.handleLibrarianChoice(choice);
+                scanner.close();
             }
+
     }
 }
