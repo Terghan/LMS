@@ -87,8 +87,14 @@ public class LibrarianInterface {
                     // Add User
                     System.out.println("Enter user details:");
                     // Get input for user details (name, contactDetails)
+                    System.out.println("Please enter the user's name: ");
+                    String newUserName = scanner.nextLine();
+                    System.out.println("Please enter user's phone number: ");
+                    String newUserPhone = scanner.nextLine();
                     // Create a new User object
+                    User newUser = new User(newUserName, newUserPhone);
                     // Add the user to the database using userDatabase.addUser(user);
+                    userDatabase.addUser(newUser);
                     break;
                 case 5:
                     // Update User

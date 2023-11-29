@@ -31,7 +31,7 @@ public class UserInterface {
      * @param choice The selected option.
      */
     public void handleUserChoice(int choice) {
-        try (Scanner scanner = new Scanner(System.in)) {
+        Scanner scanner = new Scanner(System.in);
             switch (choice) {
                 case 1:
                     // Search for Book
@@ -60,8 +60,9 @@ public class UserInterface {
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
-            }
         }
+
+        scanner.close();
     }
 
     /**
@@ -70,14 +71,14 @@ public class UserInterface {
     public static void main(String[] args) {
         // Initialize BookDatabase, TransactionDatabase
         UserInterface userInterface = new UserInterface(new BookDatabase(), new TransactionDatabase());
-        try (Scanner scanner = new Scanner(System.in)) {
+        Scanner scanner = new Scanner(System.in);
             while (true) {
                 userInterface.displayMainMenu();
                 int choice = scanner.nextInt();
                 scanner.nextLine(); // Consume newline character
 
                 userInterface.handleUserChoice(choice);
-            }
+                scanner.close();
         }
     }
 }

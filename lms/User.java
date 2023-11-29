@@ -50,4 +50,5 @@ public class User {
         System.out.println("Name: " + name);
         System.out.println("Contact Details: " + contactDetails);
     }
+
 }
