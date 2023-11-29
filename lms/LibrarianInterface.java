@@ -21,9 +21,9 @@ public class LibrarianInterface {
      */
     public void displayMainMenu() {
         System.out.println("Librarian Interface - Main Menu");
-        System.out.println("1. Add Book");
-        System.out.println("2. Update Book");
-        System.out.println("3. Remove Book");
+        System.out.println("1. Display Library");
+        System.out.println("2. Add Book");
+        System.out.println("3. Update Book");
         System.out.println("4. Add User");
         System.out.println("5. Update User");
         System.out.println("6. Remove User");
@@ -41,72 +41,89 @@ public class LibrarianInterface {
      */
     public void handleLibrarianChoice(int choice) {
         Scanner scanner = new Scanner(System.in);
+            switch (choice) {
+                case 1:
+                    // Display current library
+                    BookDatabase.displayLibrary(bookDatabase);
+                    break;
+                case 2:
+                    // Obtain new book details
+                    System.out.println("Enter book title: ");
+                    String newTitle = scanner.nextLine();
+                    System.out.println("Enter book author: ");
+                    String newAuthor = scanner.nextLine();
+                    System.out.println("Enter book genre: ");
+                    String newGenre = scanner.nextLine();
+                    System.out.println("Enter book ISBN: ");
+                    String newISBN = scanner.nextLine();
 
-        switch (choice) {
-            case 1:
-                // Add Book
-                System.out.println("Enter book details:");
-                // Get input for book details (title, author, genre, ISBN)
-                // Create a new Book object
-                // Add the book to the database using bookDatabase.addBook(book);
-                break;
-            case 2:
-                // Update Book
-                System.out.print("Enter the ISBN of the book to update: ");
-                String updateISBN = scanner.nextLine();
-                Book updateBook = bookDatabase.getBookDetails(updateISBN);
-                if (updateBook != null) {
-                    // Get updated details for the book
-                    // Update the book using updateBook.updateBookDetails(newDetails);
-                } else {
-                    System.out.println("Book not found.");
-                }
-                break;
-            case 4:
-                // Add User
-                System.out.println("Enter user details:");
-                // Get input for user details (name, contactDetails)
-                // Create a new User object
-                // Add the user to the database using userDatabase.addUser(user);
-                break;
-            case 5:
-                // Update User
-                System.out.print("Enter the name of the user to update: ");
-                String updateUserName = scanner.nextLine();
-                User updateUser = userDatabase.getUserDetails(updateUserName);
-                if (updateUser != null) {
-                    // Get updated details for the user
-                    // Update the user using updateUser.updateUserInfo(newDetails);
-                } else {
-                    System.out.println("User not found.");
-                }
-                break;
-            case 6:
-                // Remove User
-                System.out.print("Enter the name of the user to remove: ");
-                String removeUserName = scanner.nextLine();
-                userDatabase.removeUser(removeUserName);
-                break;
-            case 7:
-                // Display Book Details
-                // Implement based on your requirements
-                break;
-            case 8:
-                // Display User Details
-                // Implement based on your requirements
-                break;
-            case 9:
-                // Display Transaction Details
-                // Implement based on your requirements
-                break;
-            case 10:
-                System.out.println("Exiting Librarian Interface. Goodbye!");
-                System.exit(0);
-                break;
-            default:
-                System.out.println("Invalid choice. Please enter a valid option.");
+                    // Create a new Book object
+                    Book newBook = new Book(newTitle, newAuthor, newGenre, newISBN);
+
+                    // Add the book to the database using bookDatabase.addBook(book);
+                    bookDatabase.addBook(newBook);
+                    break;
+                case 3:
+                    // Update Book
+                    System.out.print("Enter the ISBN of the book to update: ");
+                    String updateISBN = scanner.nextLine();
+                    Book updateBook = bookDatabase.getBookDetails(updateISBN);
+                    if (updateBook != null) {
+                        // Get updated details for the book
+                        // Update the book using updateBook.updateBookDetails(newDetails);
+                    } else {
+                        System.out.println("Book not found.");
+                    }
+                    break;
+                case 4:
+                    // Add User
+                    System.out.println("Enter user details:");
+                    // Get input for user details (name, contactDetails)
+                    // Create a new User object
+                    // Add the user to the database using userDatabase.addUser(user);
+                    break;
+                case 5:
+                    // Update User
+                    System.out.print("Enter the name of the user to update: ");
+                    String updateUserName = scanner.nextLine();
+                    User updateUser = userDatabase.getUserDetails(updateUserName);
+                    if (updateUser != null) {
+                        // Get updated details for the user
+                        // Update the user using updateUser.updateUserInfo(newDetails);
+                    } else {
+                        System.out.println("User not found.");
+                    }
+                    break;
+                case 6:
+                    // Remove User
+                    System.out.print("Enter the name of the user to remove: ");
+                    String removeUserName = scanner.nextLine();
+                    userDatabase.removeUser(removeUserName);
+                    break;
+                case 7:
+                    // Display Book Details
+                    System.out.println("Enter the ISBN of the book: ");
+                    Book temp = bookDatabase.getBookDetails(scanner.nextLine());
+                    System.out.println(temp.getTitle());
+                    System.out.println(temp.getAuthor());
+                    System.out.println(temp.getGenre());
+                    break;
+                case 8:
+                    // Display User Details
+                    // Implement based on your requirements
+                    break;
+                case 9:
+                    // Display Transaction Details
+                    // Implement based on your requirements
+                    break;
+                case 10:
+                    System.out.println("Exiting Librarian Interface. Goodbye!");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter a valid option.");
+            }
         }
-    }
 
     /**
      * Main method to start the librarian interface.
@@ -115,13 +132,12 @@ public class LibrarianInterface {
         // Initialize BookDatabase, UserDatabase, TransactionDatabase
         LibrarianInterface librarianInterface = new LibrarianInterface(new BookDatabase(), new UserDatabase(), new TransactionDatabase());
         Scanner scanner = new Scanner(System.in);
+            while (true) {
+                librarianInterface.displayMainMenu();
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline character
 
-        while (true) {
-            librarianInterface.displayMainMenu();
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline character
-
-            librarianInterface.handleLibrarianChoice(choice);
-        }
+                librarianInterface.handleLibrarianChoice(choice);
+            }
     }
 }

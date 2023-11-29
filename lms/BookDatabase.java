@@ -1,5 +1,6 @@
 package lms;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,4 +77,14 @@ public class BookDatabase {
             return false;
         }
     }
+
+    public static void displayLibrary(BookDatabase bookDatabase) {
+        System.out.println("Library Contents: ");
+        for (Map.Entry<String, Book> entry : bookDatabase.books.entrySet()) {
+            String bookTitle = entry.getKey();
+            Book book = entry.getValue();
+            System.out.println("Key: " + bookTitle + ", " + book);
+        }
+    }
+
 }

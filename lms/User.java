@@ -1,4 +1,5 @@
 package lms;
+
 public class User {
     // Variables
     private String name;
