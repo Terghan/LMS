@@ -81,9 +81,9 @@ public class BookDatabase {
     public static void displayLibrary(BookDatabase bookDatabase) {
         System.out.println("Library Contents: ");
         for (Map.Entry<String, Book> entry : bookDatabase.books.entrySet()) {
-            String bookTitle = entry.getKey();
+            String bookISBN = entry.getKey();
             Book book = entry.getValue();
-            System.out.println("Key: " + bookTitle + ", " + book);
+            System.out.println("ISBN: " + bookISBN + ", " + book);
         }
     }
 

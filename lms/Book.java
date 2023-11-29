@@ -58,6 +58,7 @@ public class Book {
     public void setAvailability(boolean available) {
         this.available = available;
     }
+    
 
     // Methods
 
@@ -98,5 +99,10 @@ public class Book {
         } else {
             System.out.println("Book is already returned.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Title: " + title + ", Author: " + author + ", ISBN: " + ISBN;
     }
 }
